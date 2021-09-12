@@ -24,10 +24,13 @@ export class TodoComponent implements OnInit {
     
   }
   TaskAdded(){
-    this.Tasks2.push({"TaskName":this.Tasks.TaskName,"TaskPriority":this.Tasks.TaskPriority,
-    "TaskDeadline":this.Tasks.TaskDeadline})
-    console.log(this.Tasks2)
-    console.log(this.Tasks2.length)
+    if(this.Tasks.TaskName!="" && this.Tasks.TaskPriority!="" && this.Tasks.TaskDeadline!=""){
+      this.Tasks2.push({"TaskName":this.Tasks.TaskName,"TaskPriority":this.Tasks.TaskPriority,
+      "TaskDeadline":this.Tasks.TaskDeadline})  
+    }
+    else {
+      alert("All fields are required!")
+    }
     if(this.Tasks2.length==1){
       this.first = false;
   }
@@ -47,7 +50,6 @@ export class TodoComponent implements OnInit {
 
     }
   }
-
   constructor() { }
 
   ngOnInit(): void {
