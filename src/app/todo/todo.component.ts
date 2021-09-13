@@ -57,6 +57,9 @@ export class TodoComponent implements OnInit {
 
     }
   }
+  onDelete(event:any){
+    this.Tasks2 = this.Tasks2.filter(name=>name!==event)
+  }
   constructor() { }
 
   ngOnInit(): void {
