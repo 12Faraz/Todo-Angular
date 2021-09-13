@@ -9,6 +9,7 @@ export class TodoComponent implements OnInit {
   clicked:boolean=false;
   submitted:boolean=false;
   first:boolean = false;
+  Days:number =0;
   Tasks = {
     TaskName:'',
     TaskPriority:'',
@@ -26,7 +27,13 @@ export class TodoComponent implements OnInit {
   TaskAdded(){
     if(this.Tasks.TaskName!="" && this.Tasks.TaskPriority!="" && this.Tasks.TaskDeadline!=""){
       this.Tasks2.push({"TaskName":this.Tasks.TaskName,"TaskPriority":this.Tasks.TaskPriority,
-      "TaskDeadline":this.Tasks.TaskDeadline})  
+      "TaskDeadline":this.Tasks.TaskDeadline})
+        console.log()
+        let curdate = new Date();
+        console.log(curdate);
+        let millis = new Date(this.Tasks.TaskDeadline).getTime() - curdate.getTime();
+        this.Days= Math.floor((millis / (60*60*24*1000)))
+      //Days = new Date() - this.Tasks.TaskDeadline  
     }
     else {
       alert("All fields are required!")
