@@ -10,12 +10,18 @@ export class TodoComponent implements OnInit {
   submitted:boolean=false;
   first:boolean = false;
   Days:number =0;
+  Complete:boolean=false;
   Tasks = {
     TaskName:'',
     TaskPriority:'',
     TaskDeadline:''
   };
   Tasks2 = [{
+    TaskName:'',
+    TaskPriority:'',
+    TaskDeadline:''
+  }]
+  Completed = [{
     TaskName:'',
     TaskPriority:'',
     TaskDeadline:''
@@ -59,6 +65,19 @@ export class TodoComponent implements OnInit {
   }
   onDelete(event:any){
     this.Tasks2 = this.Tasks2.filter(name=>name!==event)
+  }
+  onCompletion(event:any){
+    this.Completed.push({"TaskName":event.TaskName, "TaskPriority":event.TaskPriority,
+    "TaskDeadline":event.TaskDeadline})
+    this.Tasks2 = this.Tasks2.filter(name=>name!==event)
+      console.log(this.Completed);
+  }
+  onCompleted() {
+    this.Complete=true;
+    console.log(this.Completed);
+  }
+  HideCompleted(){
+    this.Complete = false;
   }
   constructor() { }
 

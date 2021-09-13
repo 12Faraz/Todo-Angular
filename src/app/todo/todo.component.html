@@ -1,4 +1,6 @@
-<button class="btn btn-primary" (click)="AddNewTask()" [disabled]="clicked">Add new Task</button>
+<button class="btn btn-primary border-dark" (click)="AddNewTask()" [disabled]="clicked">Add new Task</button>
+<button class="btn btn-primary border-dark" (click)="onCompleted()" >Completed Tasks</button>
+
 <form *ngIf="clicked" (ngSubmit)="TaskAdded()">
         <div class="form-group">
           <label for="TaskName">Name</label>
@@ -20,11 +22,11 @@
             <label for="TaskDeadline">Deadline</label>
             <input type="Date" name="Deadline" [(ngModel)]="Tasks.TaskDeadline" class="form-control" id="formGroupExampleInput" placeholder="Task Name">
           </div>
-          <button class="btn btn-primary">Submit</button>
+          <button class="btn btn-primary border-dark">Submit</button>
 </form>
 
 
-<div class="container"  *ngIf = "submitted && first">
+<div class="container"   *ngIf = "submitted && first">
     <div class="row">
         <div class="col-sm-100">
             <div class="card"  *ngFor="let Task of Tasks2 | slice:1; let i = index">
@@ -34,11 +36,27 @@
                     <p class="card-text">Priority :- {{Task.TaskPriority}}</p>
                     <p class="card-text"><small class="text-muted">Deadline :- {{Task.TaskDeadline}}</small></p>
                     <h5>Days Remaining :- {{Days}}</h5>
-                    <button class="btn btn-primary" style="margin-left: 25%;" (click)="onDelete(Task)"> Delete</button>
+                    <button class="btn btn-primary border-dark" style="margin-left: 25%;" (click)="onDelete(Task)"> Delete</button>
+                    <button class="btn btn-primary border-dark" style="margin-left: 15%;" (click)="onCompletion(Task)"> Completed</button>                    
                   </div>
             </div>
         </div>
 </div>
-
 </div>
-<button type="button" class="btn btn-danger" [disabled]="!clicked" (click)="onReset()">Reset</button>
+<div class="container" *ngIf = "Complete">
+  <div class="row">
+      <div class="col-sm-100">
+          <div class="card"  *ngFor="let Task of Completed | slice:1; let i = index">
+              <div class="card-block border border-dark"
+               [ngStyle]="{'background-color':(Task.TaskPriority) == 'High' ? '#ff2b2b' : ' #7eeb3c' }" >
+                  <h4 class="card-title">{{Task.TaskName}}</h4>
+                  <p class="card-text">Priority :- {{Task.TaskPriority}}</p>
+                  <p class="card-text"><small class="text-muted">Deadline :- {{Task.TaskDeadline}}</small></p>
+                  <h5>Days Remaining :- {{Days}}</h5>
+                </div>
+          </div>
+      </div>
+</div>
+</div>
+<button class="btn btn-primary border-dark" (click)="HideCompleted()">Hide Completed</button>
+<button type="button" class="btn btn-danger border-dark" [disabled]="!clicked" (click)="onReset()">Reset</button>
