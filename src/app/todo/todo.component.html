@@ -35,7 +35,7 @@
                     <h4 class="card-title">{{Task.TaskName}}</h4>
                     <p class="card-text">Priority :- {{Task.TaskPriority}}</p>
                     <p class="card-text"><small class="text-muted">Deadline :- {{Task.TaskDeadline}}</small></p>
-                    <h5>Days Remaining :- {{Days}}</h5>
+                    <h5>Days Remaining :- {{Task.NumberOfDays}}</h5>
                     <button class="btn btn-primary border-dark" style="margin-left: 25%;" (click)="onDelete(Task)"> Delete</button>
                     <button class="btn btn-primary border-dark" style="margin-left: 15%;" (click)="onCompletion(Task)"> Completed</button>                    
                   </div>
@@ -52,7 +52,7 @@
                   <h4 class="card-title">{{Task.TaskName}}</h4>
                   <p class="card-text">Priority :- {{Task.TaskPriority}}</p>
                   <p class="card-text"><small class="text-muted">Deadline :- {{Task.TaskDeadline}}</small></p>
-                  <h5>Days Remaining :- {{Days}}</h5>
+                  
                 </div>
           </div>
       </div>

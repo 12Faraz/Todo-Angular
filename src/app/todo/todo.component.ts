@@ -14,14 +14,21 @@ export class TodoComponent implements OnInit {
   Tasks = {
     TaskName:'',
     TaskPriority:'',
-    TaskDeadline:''
+    TaskDeadline:'',
+    NumberOfDays:0
   };
   Tasks2 = [{
     TaskName:'',
     TaskPriority:'',
-    TaskDeadline:''
+    TaskDeadline:'',
+    NumberOfDays:0
   }]
   Completed = [{
+    TaskName:'',
+    TaskPriority:'',
+    TaskDeadline:''
+  }]
+  UnCompleted = [{
     TaskName:'',
     TaskPriority:'',
     TaskDeadline:''
@@ -31,15 +38,20 @@ export class TodoComponent implements OnInit {
     
   }
   TaskAdded(){
-    if(this.Tasks.TaskName!="" && this.Tasks.TaskPriority!="" && this.Tasks.TaskDeadline!=""){
-      this.Tasks2.push({"TaskName":this.Tasks.TaskName,"TaskPriority":this.Tasks.TaskPriority,
-      "TaskDeadline":this.Tasks.TaskDeadline})
-        console.log()
-        let curdate = new Date();
+    if(this.Tasks.TaskName!="" && this.Tasks.TaskPriority!="" && this.Tasks.TaskDeadline!="" ){
+      let curdate = new Date();
         console.log(curdate);
         let millis = new Date(this.Tasks.TaskDeadline).getTime() - curdate.getTime();
-        this.Days= Math.floor((millis / (60*60*24*1000)))
-      //Days = new Date() - this.Tasks.TaskDeadline  
+        this.Days= Math.floor((millis / (60*60*24*1000)))     
+      if(this.Days+1>=0){
+        console.log("Inside if" +this.Tasks.NumberOfDays)
+        console.log(this.Days)
+        this.Tasks2.push({"TaskName":this.Tasks.TaskName,"TaskPriority":this.Tasks.TaskPriority,
+      "TaskDeadline":this.Tasks.TaskDeadline,"NumberOfDays":this.Days+1})
+    }
+    else {
+      alert("Invalid Date! Cannot add past tasks")
+    }
     }
     else {
       alert("All fields are required!")
@@ -51,6 +63,7 @@ export class TodoComponent implements OnInit {
     this.first = true;
   }
     this.submitted=true;
+    console.log(this.Tasks2)
   }
   onReset(){
     this.first = false;
@@ -58,7 +71,8 @@ export class TodoComponent implements OnInit {
       this.Tasks2 = [{
         TaskName:'',
         TaskPriority:'',
-        TaskDeadline:''
+        TaskDeadline:'',
+        NumberOfDays:0
       }]
 
     }
@@ -74,11 +88,26 @@ export class TodoComponent implements OnInit {
   }
   onCompleted() {
     this.Complete=true;
-    console.log(this.Completed);
   }
   HideCompleted(){
     this.Complete = false;
   }
+ /* ShowUncompleted(){
+    console.log(this.Tasks2)
+    for(var i in this.Tasks2){
+       console.log(this.Tasks2[i].TaskDeadline)
+       let curdate = new Date();
+        console.log(curdate);
+        let millis = new Date(this.Tasks2[i].TaskDeadline).getTime() - curdate.getTime();
+        this.Days= Math.floor((millis / (60*60*24*1000)))      
+        console.log(this.Days)
+        if(this.Days<0){
+          this.Completed.push({"TaskName":this.Tasks2[i].TaskName, "TaskPriority":this.Tasks2[i].TaskPriority,
+          "TaskDeadline":this.Tasks2[i].TaskDeadline})
+        }
+    }
+    console.log(this.UnCompleted)
+  }*/
   constructor() { }
 
   ngOnInit(): void {
