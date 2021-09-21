@@ -1,6 +1,14 @@
 <button class="btn btn-primary border-dark" (click)="AddNewTask()" [disabled]="clicked">Add new Task</button>
 <button class="btn btn-primary border-dark" (click)="onCompleted()" >Completed Tasks</button>
 
+<span class="border" style="float: right;">
+  <span>Total Tasks</span> :- {{TotalTasks}}</span>
+  <br>
+  <span class="border" style="float: right;">
+    <span>Completed Tasks</span> :- {{CompletedTasks}}</span>
+    <br> <br> 
+    <span *ngIf="TotalTasks!=0" class="border" style="float: right;">
+      <span >Completion Percentage</span> :- {{(CompletedTasks/TotalTasks)*100}} %</span>
 <form *ngIf="clicked" (ngSubmit)="TaskAdded()">
         <div class="form-group">
           <label for="TaskName">Name</label>

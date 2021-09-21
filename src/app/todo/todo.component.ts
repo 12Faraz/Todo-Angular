@@ -11,6 +11,9 @@ export class TodoComponent implements OnInit {
   first:boolean = false;
   Days:number =0;
   Complete:boolean=false;
+  TotalTasks:number=0;
+  CompletedTasks:number=0;
+  UncompletedTasks:number=0;
   Tasks = {
     TaskName:'',
     TaskPriority:'',
@@ -63,7 +66,16 @@ export class TodoComponent implements OnInit {
     this.first = true;
   }
     this.submitted=true;
-    console.log(this.Tasks2)
+    this.TotalTasks = this.Tasks2.length-1;
+    console.log("Length"+this.TotalTasks)
+    if(this.Tasks2.length<=1){
+      this.Tasks2 = [{
+        TaskName:'',
+        TaskPriority:'',
+        TaskDeadline:'',
+        NumberOfDays:0
+      }]
+    }
   }
   onReset(){
     this.first = false;
@@ -76,6 +88,8 @@ export class TodoComponent implements OnInit {
       }]
 
     }
+    this.CompletedTasks=0;
+    this.TotalTasks=0;
   }
   onDelete(event:any){
     this.Tasks2 = this.Tasks2.filter(name=>name!==event)
@@ -85,6 +99,8 @@ export class TodoComponent implements OnInit {
     "TaskDeadline":event.TaskDeadline})
     this.Tasks2 = this.Tasks2.filter(name=>name!==event)
       console.log(this.Completed);
+      this.CompletedTasks = this.Completed.length - 1;
+
   }
   onCompleted() {
     this.Complete=true;
